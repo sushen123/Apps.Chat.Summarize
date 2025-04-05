@@ -1,4 +1,4 @@
 export enum ActionButton {
-    OPEN_SUMMARIZE_MODAL_ACTION = 'open-summarize-model-action',
-    OPEN_SUMMARIZE_MODAL_LABEL = 'Summarize_the_thread'
+    SUMMARIZE_MESSAGES_ACTION = 'summarize_messages',
+    SUMMARIZE_MESSAGES_LABEL = 'Summarize_messages',
 }
