@@ -177,7 +177,6 @@ export async function getRoomMessages(
     let filteredMessages = messages;
 
     if (usernames) {
-        app.getLogger().debug(usernames, "usernames12");
         filteredMessages = messages.filter((message) => {
             const isMatched = usernames.includes(message.sender.username);
             if (isMatched) {
@@ -264,8 +263,6 @@ export async function getThreadMessages(
 
     let filteredMessages = thread;
     if (usernames) {
-        app.getLogger().debug(usernames, "usernames12"
-        )
         filteredMessages = thread.filter((message) => {
             const isMatched = usernames.includes(message.sender.username);
             if (isMatched) {

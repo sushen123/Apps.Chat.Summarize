@@ -58,12 +58,6 @@ export class ExecuteViewSubmitHandler {
         const unreadCount = filter === 'unread' ? await this.read.getUserReader().getUserUnreadMessageCount(user.id) : undefined;
         const usernames: string[] | undefined = filter === 'users' ? view.state?.[SummarizeModalEnum.USER_LISTS_BLOCK_ID]?.[SummarizeModalEnum.USER_LISTS_ACTION_ID] : undefined;
 
-        this.app.getLogger().debug(
-            startDate, "startdate",
-            unreadCount, "unreadCount",
-            usernames, "usernames"
-        )
-
     await handleSummaryGeneration(this.app, this.read, this.http, room, user, threadId, startDate, unreadCount,usernames, anyMatchedUsername);
 
         return this.context.getInteractionResponder().successResponse();

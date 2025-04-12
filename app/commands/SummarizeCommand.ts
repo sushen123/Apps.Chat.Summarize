@@ -91,8 +91,6 @@ export class SummarizeCommand implements ISlashCommand {
 
         const unreadCount = filter === 'unread' ? await read.getUserReader().getUserUnreadMessageCount(user.id) : undefined;
 
-        this.app.getLogger().debug(usernames, "usernames", startDate, "startdate")
-
         await handleSummaryGeneration(this.app, read, http, room, user, threadId, startDate, unreadCount, usernames, anyMatchedUsername);
         }
     }
