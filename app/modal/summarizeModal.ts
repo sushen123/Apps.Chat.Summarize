@@ -17,25 +17,6 @@ import { MultiStaticSelectOptionsParam } from '../ui-kit/Element/IMultiStaticSel
 import { getData } from '../lib/dataStore';
 import { ROOM_ID_KEY } from '../enum/keys';
 import { IUser } from '@rocket.chat/apps-engine/definition/users';
-/**
- * Creates a subscription modal for news aggregation.
- * @param app - The NewsAggregationApp instance.
- * @param room - The room where the modal will be shown.
- * @param sender - The user who initiated the modal.
- * @param read - The IRead accessor.
- * @param modify - The IModify accessor.
- * @param http - The IHttp accessor.
- * @param persis - The IPersistence accessor.
- * @returns A UI Kit surface view parameter for the modal.
- */
-
-export interface IParticipantProps {
-    text: {
-        type: TextObjectType;
-        text: string;
-    };
-    value: string;
-}
 
 
 export async function summarizeModal(
@@ -107,16 +88,14 @@ export async function summarizeModal(
     ),
 	);
 
-
-
     if(filterValue === "users") {
-        const participantOptions: MultiStaticSelectOptionsParam = [];
+        const userOptions: MultiStaticSelectOptionsParam = [];
         try {
         if (user.id && roomId) {
             const members = await read.getRoomReader().getMembers(roomId);
             for (const member of members) {
                 if (member.id) {
-                    participantOptions.push({
+                    userOptions.push({
                         text: {
                             type: TextObjectType.MRKDWN,
                             text: `${member.name} - @${member.username}`,
@@ -125,7 +104,7 @@ export async function summarizeModal(
                     });
                 }
             }
-            participantOptions.sort((a, b) => {
+            userOptions.sort((a, b) => {
                 return a.text.text.toUpperCase() < b.text.text.toUpperCase()
                     ? -1
                     : 1;
@@ -135,7 +114,7 @@ export async function summarizeModal(
             app.getLogger().log(error)
         }
 
-    const userMultiSelectOptions = elementBuilder.createMultiSelectOptions(participantOptions);
+    const userMultiSelectOptions = elementBuilder.createMultiSelectOptions(userOptions);
 
     const userSelectElement = elementBuilder.addMultiStaticSelect(
 		{
